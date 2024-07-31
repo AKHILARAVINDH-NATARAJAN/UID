@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        h1 {
+            color: #333;
+        }
+        label {
+            display: inline-block;
+            width: 100px;
+            margin-bottom: 10px;
+        }
+        input[type="text"],
+        input[type="email"] {
+            width: 200px;
+            padding: 5px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #det {
+            margin-top: 20px;
+        }
+        .student-details {
+            background-color: #fff;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <h1>Student</h1>
+    <p id="det"></p>
+
+    <label for="name">Name:</label>
+    <input type="text" id="name"><br><br>
+
+    <label for="rollno">Roll No:</label>
+    <input type="text" id="rollno"><br><br>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email"><br><br>
+    
+    <label for="cgpa">CGPA:</label>
+    <input type="text" id="cgpa"><br><br>
+
+    <button onclick="addStudent()">Add Student</button>
+
+    <script>
+        class Student {
+            constructor(name, rollno, email, cgpa) {
+                this.name = name;
+                this.rollno = rollno;
+                this.email = email;
+                this.cgpa = cgpa;
+            }
+        }
+
+        let students = [];
+
+        function addStudent() {
+            const name = document.getElementById("name").value;
+            const rollno = document.getElementById("rollno").value;
+            const email = document.getElementById("email").value;
+            const cgpa = document.getElementById("cgpa").value;
+
+            const newStudent = new Student(name, rollno, email, cgpa);
+            students.push(newStudent);
+
+            displayStudents();
+        }
+
+        function displayStudents() {
+            let display = "";
+            students.forEach((student, index) => {
+                display += `<div class="student-details">`;
+                display += `<b>Student ${index + 1}</b><br>`;
+                display += `Name: <b>${student.name}</b><br>`;
+                display += `Roll No: <b>${student.rollno}</b><br>`;
+                display += `Email: <b>${student.email}</b><br>`;
+                display += `CGPA: <b>${student.cgpa}</b><br>`;
+                display += `</div>`;
+            });
+
+            document.getElementById("det").innerHTML = display;
+            document.getElementById("name").value = "";
+            document.getElementById("rollno").value = "";
+            document.getElementById("email").value = "";
+            document.getElementById("cgpa").value = "";
+        }
+    </script>
+</body>
+</html>
